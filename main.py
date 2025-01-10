@@ -6,7 +6,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQu
 
 # Replace with your bot token and admin channel ID
 BOT_TOKEN = "7501736452:AAFvT-wcT5pk1yIc2EfTLeYiQDZGCxxS46A"
-ADMIN_CHANNEL_ID = "-1002440310761"
+ADMIN_CHANNEL_ID = "@Stryane"
 
 # States for the ConversationHandler
 (NAME, PART, AUTHOR, PHOTO, STORY, MESSAGE) = range(6)
