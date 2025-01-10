@@ -112,7 +112,7 @@ def cancel(update: Update, context: CallbackContext) -> int:
     return ConversationHandler.END
 
 def main() -> None:
-    Application = Application("YOUR_BOT_TOKEN")  # Replace with your bot token
+    application = "7501736452:AAFvT-wcT5pk1yIc2EfTLeYiQDZGCxxS46A"  # Replace with your bot token
 
     dispatcher = application.add_handler
 
@@ -134,7 +134,7 @@ def main() -> None:
     dispatcher.add_handler(MessageHandler(filters.Text & ~filters.command, handle_reject_comment))
 
     application.run_polling()
-    Application.idle()
+    application.idle()
 
 if __name__ == "__main__":
     main()
