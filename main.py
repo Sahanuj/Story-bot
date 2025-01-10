@@ -10,8 +10,8 @@ from telegram.ext import (
 )
 
 # Replace with your bot token and admin channel ID
-BOT_TOKEN = "YOUR_BOT_TOKEN"
-ADMIN_CHANNEL_ID = "@YourAdminChannel"
+BOT_TOKEN = "7501736452:AAFvT-wcT5pk1yIc2EfTLeYiQDZGCxxS46A"
+ADMIN_CHANNEL_ID = "-1002440310761"
 
 # States for the ConversationHandler
 (NAME, PART, AUTHOR, PHOTO, STORY, MESSAGE) = range(6)
