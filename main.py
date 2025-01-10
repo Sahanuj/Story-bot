@@ -112,7 +112,7 @@ def cancel(update: Update, context: CallbackContext) -> int:
     return ConversationHandler.END
 
 def main() -> None:
-    torgan = Application("YOUR_BOT_TOKEN")  # Replace with your bot token
+    torgan =Application.builder().token("Your_bot_token").build()  # Replace with your bot token
 
 
     conv_handler = ConversationHandler(
