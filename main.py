@@ -1,13 +1,8 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import (
-    Application,
-    CommandHandler,
-    MessageHandler,
-    CallbackQueryHandler,
-    filters,
-    ContextTypes,
-    ConversationHandler,
-)
+import threading
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, filters, ContextTypes, ConversationHandler
 
 # Replace with your bot token and admin channel ID
 BOT_TOKEN = "7501736452:AAFvT-wcT5pk1yIc2EfTLeYiQDZGCxxS46A"
@@ -15,6 +10,27 @@ ADMIN_CHANNEL_ID = "-1002440310761"
 
 # States for the ConversationHandler
 (NAME, PART, AUTHOR, PHOTO, STORY, MESSAGE) = range(6)
+
+# Dummy HTTP server for health checks
+class HealthCheckHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"OK")
+
+def run_health_check_server():
+    server = HTTPServer(("0.0.0.0", 8000), HealthCheckHandler)
+    server.serve_forever()
+
+# Start the health check server in a separate thread
+threading.Thread(target=run_health_check_server, daemon=True).start()
+
+# Telegram bot implementation (use the previous script here)
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("කතාවේ නම: -")
+    return NAME
+
+# Include all other bot logic here...
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
