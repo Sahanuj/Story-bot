@@ -1,6 +1,5 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler, ConversationHandler, CallbackContext
-
+from telegram.ext import Updater, CommandHandler, MessageHandler, filters, CallbackQueryHandler, ConversationHandler, CallbackContext
 # Conversation states
 NAME, PART, AUTHOR, IMAGE, STORY, NOTE = range(6)
 
@@ -120,19 +119,19 @@ def main() -> None:
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
         states={
-            NAME: [MessageHandler(Filters.text & ~Filters.command, get_name)],
-            PART: [MessageHandler(Filters.text & ~Filters.command, get_part)],
-            AUTHOR: [MessageHandler(Filters.text & ~Filters.command, get_author)],
-            IMAGE: [MessageHandler(Filters.photo | Filters.text & ~Filters.command, get_image)],
-            STORY: [MessageHandler(Filters.text & ~Filters.command, get_story)],
-            NOTE: [MessageHandler(Filters.text & ~Filters.command, get_note)],
+            NAME: [MessageHandler(filters.Text & ~filters.command, get_name)],
+            PART: [MessageHandler(filters.Text & ~filters.command, get_part)],
+            AUTHOR: [MessageHandler(filters.Text & ~filters.command, get_author)],
+            IMAGE: [MessageHandler(filters.photo | filters.text & ~filters.command, get_image)],
+            STORY: [MessageHandler(filters.Text & ~filters.command, get_story)],
+            NOTE: [MessageHandler(filters.Text & ~filters.command, get_note)],
         },
         fallbacks=[CommandHandler("cancel", cancel)],
     )
 
     dispatcher.add_handler(conv_handler)
     dispatcher.add_handler(CallbackQueryHandler(button_handler))
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_reject_comment))
+    dispatcher.add_handler(MessageHandler(filters.Text & ~filters.command, handle_reject_comment))
 
     updater.start_polling()
     updater.idle()
