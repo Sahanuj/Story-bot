@@ -112,9 +112,9 @@ def cancel(update: Update, context: CallbackContext) -> int:
     return ConversationHandler.END
 
 def main() -> None:
-    application = "7501736452:AAFvT-wcT5pk1yIc2EfTLeYiQDZGCxxS46A"  # Replace with your bot token
+    application = Application("YOUR_BOT_TOKEN")  # Replace with your bot token
 
-    dispatcher = application.add_handler
+    dispatcher = application
 
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
@@ -122,7 +122,7 @@ def main() -> None:
             NAME: [MessageHandler(filters.Text & ~filters.command, get_name)],
             PART: [MessageHandler(filters.Text & ~filters.command, get_part)],
             AUTHOR: [MessageHandler(filters.Text & ~filters.command, get_author)],
-            IMAGE: [MessageHandler(filters.photo | filters.text & ~filters.command, get_image)],
+            IMAGE: [MessageHandler(filters.photo | filters.Text & ~filters.command, get_image)],
             STORY: [MessageHandler(filters.Text & ~filters.command, get_story)],
             NOTE: [MessageHandler(filters.Text & ~filters.command, get_note)],
         },
@@ -134,7 +134,7 @@ def main() -> None:
     dispatcher.add_handler(MessageHandler(filters.Text & ~filters.command, handle_reject_comment))
 
     application.run_polling()
-    application.idle()
+    updater.idle()
 
 if __name__ == "__main__":
     main()
