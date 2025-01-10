@@ -133,8 +133,8 @@ def main() -> None:
     dispatcher.add_handler(CallbackQueryHandler(button_handler))
     dispatcher.add_handler(MessageHandler(filters.Text & ~filters.command, handle_reject_comment))
 
-    updater.start_polling()
-    updater.idle()
+    application.run_polling()
+    Application.idle()
 
 if __name__ == "__main__":
     main()
