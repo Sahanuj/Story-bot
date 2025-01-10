@@ -1,5 +1,5 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Updater, CommandHandler, MessageHandler, filters, CallbackQueryHandler, ConversationHandler, CallbackContext
+from telegram.ext import Application, CommandHandler, MessageHandler, filters, CallbackQueryHandler, ConversationHandler, CallbackContext
 # Conversation states
 NAME, PART, AUTHOR, IMAGE, STORY, NOTE = range(6)
 
@@ -112,9 +112,9 @@ def cancel(update: Update, context: CallbackContext) -> int:
     return ConversationHandler.END
 
 def main() -> None:
-    updater = Updater("YOUR_BOT_TOKEN")  # Replace with your bot token
+    Application = Application("YOUR_BOT_TOKEN")  # Replace with your bot token
 
-    dispatcher = updater.dispatcher
+    dispatcher = application.add_handler
 
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
