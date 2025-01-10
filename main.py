@@ -35,13 +35,6 @@ threading.Thread(target=run_health_check_server, daemon=True).start()
 
 # Telegram bot implementation (use the previous script here)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("කතාවේ නම: -")
-    return NAME
-
-# Include all other bot logic here...
-
-
- async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Start the bot and ask for the story name."""
     context.user_data["user_id"] = update.effective_user.id
     await update.message.reply_text("කතාවේ නම: -")
