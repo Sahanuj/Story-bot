@@ -112,9 +112,8 @@ def cancel(update: Update, context: CallbackContext) -> int:
     return ConversationHandler.END
 
 def main() -> None:
-    application = Application("YOUR_BOT_TOKEN")  # Replace with your bot token
+    torgan = Application("YOUR_BOT_TOKEN")  # Replace with your bot token
 
-    dispatcher = application
 
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
@@ -129,12 +128,12 @@ def main() -> None:
         fallbacks=[CommandHandler("cancel", cancel)],
     )
 
-    dispatcher.add_handler(conv_handler)
-    dispatcher.add_handler(CallbackQueryHandler(button_handler))
-    dispatcher.add_handler(MessageHandler(filters.Text & ~filters.command, handle_reject_comment))
+    torgan.add_handler(conv_handler)
+    torgan.add_handler(CallbackQueryHandler(button_handler))
+    torgan.add_handler(MessageHandler(filters.Text & ~filters.command, handle_reject_comment))
 
-    application.run_polling()
-    updater.idle()
+    torgan.run_polling()
+    torgan.idle()
 
 if __name__ == "__main__":
     main()
