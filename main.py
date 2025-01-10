@@ -118,19 +118,19 @@ def main() -> None:
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
         states={
-            NAME: [MessageHandler(filters.Text & ~filters.command, get_name)],
-            PART: [MessageHandler(filters.Text & ~filters.command, get_part)],
-            AUTHOR: [MessageHandler(filters.Text & ~filters.command, get_author)],
-            IMAGE: [MessageHandler(filters.photo | filters.Text & ~filters.command, get_image)],
-            STORY: [MessageHandler(filters.Text & ~filters.command, get_story)],
-            NOTE: [MessageHandler(filters.Text & ~filters.command, get_note)],
+            NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_name)],
+            PART: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_part)],
+            AUTHOR: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_author)],
+            IMAGE: [MessageHandler(filters.PHOTO | filters.TEXT & ~filters.COMMAND, get_image)],
+            STORY: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_story)],
+            NOTE: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_note)],
         },
         fallbacks=[CommandHandler("cancel", cancel)],
     )
 
     torgan.add_handler(conv_handler)
     torgan.add_handler(CallbackQueryHandler(button_handler))
-    torgan.add_handler(MessageHandler(filters.Text & ~filters.command, handle_reject_comment))
+    torgan.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_reject_comment))
 
     torgan.run_polling()
     torgan.idle()
